@@ -1,3 +1,4 @@
+var webpack = require('webpack')  //add by 王圣文
 var path = require('path')
 var utils = require('./utils')
 var config = require('../config')
@@ -29,8 +30,16 @@ module.exports = {
       'vue$': 'vue/dist/vue.common.js',
       'src': resolve('src'),
       'assets': resolve('src/assets'),
-      'components': resolve('src/components')
-    }
+      'components': resolve('src/components'),
+      'jquery': resolve('src/assets/jquery-3.1.1')   //add by 王圣文
+    },
+    //增加一个plugins add by 王圣文
+    plugins:[
+      new webpack.ProvidePlugin({
+        $: 'jquery',
+        jQuery: 'jquery'
+      })
+    ]
   },
   module: {
     rules: [

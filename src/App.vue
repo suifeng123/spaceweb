@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import MyHeader from './components/MyHeader'
+import MyHeader from './components/Header'
 export default {
   name: 'app',
   components: {
@@ -18,11 +18,6 @@ export default {
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
 
-  margin-top: 60px;
 }
 </style>

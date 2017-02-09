@@ -3,6 +3,14 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+// 引入element-ui
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-default/index.css'
+// 引入vuex
+import Vuex from 'vuex'
+
+Vue.use(ElementUI)
+Vue.use(Vuex)
 
 /* eslint-disable no-new */
 new Vue({
