@@ -3,14 +3,20 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-import Hello from 'components/Hello'
+import MyHeader from 'components/MyHeader'
+import Home from 'components/Home'
 
 export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Hello',
-      component: Hello
+      name: 'Home',
+      component: Home
+    },
+    {
+      path: '/header',
+      name: 'MyHeader',
+      component: MyHeader
     }
   ]
 })

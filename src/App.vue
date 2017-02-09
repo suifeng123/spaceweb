@@ -1,14 +1,19 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <MyHeader></MyHeader>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
+import MyHeader from './components/MyHeader'
 export default {
-  name: 'app'
+  name: 'app',
+  components: {
+     MyHeader
+  }
 }
+
 </script>
 
 <style>
@@ -17,7 +22,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+
   margin-top: 60px;
 }
 </style>
