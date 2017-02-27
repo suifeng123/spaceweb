@@ -18,7 +18,7 @@ import store from './vuex/store'
 import $ from 'jquery'
 //引入组件
 import Home from './components/Home'
-import Main from './components/Main'
+import DashBoard from './components/Dashboard'
 import Storage from './components/Pool'
 
 
@@ -54,7 +54,7 @@ const routes = [
   {
     path: '/main',
     name: 'Main',
-    component: Main
+    component: DashBoard
   },
 
 

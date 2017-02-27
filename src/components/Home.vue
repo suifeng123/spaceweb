@@ -3,7 +3,7 @@
     <div>
       <MyHeader></MyHeader>
       <Leftbar></Leftbar>
-      <Main></Main>
+      <DashBoard></DashBoard>
     </div>
 </template>
 <style>
@@ -12,12 +12,12 @@
 <script>
 import MyHeader from './Header'
 import Leftbar from './Leftbar'
-import Main from './Main'
+import DashBoard from './Dashboard'
 export default {
      components: {
        MyHeader,
        Leftbar,
-       Main
+       DashBoard
      }
 }
 </script>

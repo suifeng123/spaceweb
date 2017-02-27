@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>这个是创建存储池的部分</h1>
+       <h1>sdj</h1>
     </div>
 </template>
 <style>
