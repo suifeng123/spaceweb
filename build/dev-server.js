@@ -15,7 +15,9 @@ var webpackConfig = process.env.NODE_ENV === 'testing'
   : require('./webpack.dev.conf')
 
 // default port where dev server listens for incoming traffic
-var port = process.env.PORT || config.dev.port
+//修改端口号
+//var port = process.env.PORT || config.dev.port
+var port = 8001
 // automatically open browser, if not set will be false
 var autoOpenBrowser = !!config.dev.autoOpenBrowser
 // Define HTTP proxies to your custom API backend

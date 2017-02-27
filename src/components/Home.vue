@@ -2,8 +2,8 @@
      <!--这个是主界面的开发--->
     <div>
       <MyHeader></MyHeader>
-     <h1>hello world</h1>sadf
-      asdfasd
+      <Leftbar></Leftbar>
+      <Main></Main>
     </div>
 </template>
 <style>
@@ -11,9 +11,13 @@
 </style>
 <script>
 import MyHeader from './Header'
+import Leftbar from './Leftbar'
+import Main from './Main'
 export default {
      components: {
-       MyHeader
+       MyHeader,
+       Leftbar,
+       Main
      }
 }
 </script>
