@@ -1,22 +1,39 @@
 <!-- 表格分页组件 -->
 <template>
   <div>
-    <select v-model="len">
-      <option v-for="arr in lens" :value="arr" v-text="arr"></option>
-    </select>
     <nav class="boot-nav">
       <ul class="pagination boot-page">
-        <li>首页</li>
-        <li>前一页</li>
-        <li>当前页</li>
-        <li>后一页</li>
-        <li>末页</li>
+        <li>
+          <a href="javascript:void(0)" @click="onFirstClick()">
+            <span style="font-size:15px;color:blue">首页</span>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:void(0)" aria-label="Next" @click="onPrevClick()">
+            <span style="font-size:15px;color:blue;">上一页</span>
+          </a>
+        </li>
+        <li v-for="page in pages">
+          <a href="javascript:void(0)" v-text="page" @click=""></a>
+        </li>
+        <li>
+          <a href="javascript:void(0)" aria-label="Next" @click="onNextClick()">
+            <span style="font-size:15px;color:blue;">下一页</span>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:void(0)" aria-label="Next" @click="onLastClick()">
+            <span style="font-size:15px;color:blue;">末页</span>
+          </a>
+        </li>
       </ul>
-     <div class="page-total">
-       共<span v-text="pageTotal"></span>页
-     </div>
-
+      <div class="page-total">
+        共 <span style="font-size:15px;" v-text="pageTotal"></span> 页
+      </div>
     </nav>
+    <select class="form-control boot-select" v-model="len">
+      <option v-for="arr in lens" :value="arr" v-text="arr"></option>
+    </select>
   </div>
 </template>
 
@@ -120,7 +137,9 @@ export default {
 
         // 下一页
         onNextClick () {
-
+              console.log("888888");
+              console.log(this.data)
+              console.log(this.pages)
             // 当前页是否为当前最大页码
             if (this.activeNum < this.pages.length - 1) {
                 this.activeNum = this.activeNum + 1
@@ -241,7 +260,9 @@ export default {
         }
     },
     ready () {
+      console.log("askdf");
         if (!this.async) {
+           console.log("获取页数");
             this.getPages()
         }
 

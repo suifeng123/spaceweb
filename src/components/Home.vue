@@ -17,7 +17,7 @@ export default {
      components: {
        MyHeader,
        Leftbar,
-       DashBoard
+       DashBoard,
      }
 }
 </script>

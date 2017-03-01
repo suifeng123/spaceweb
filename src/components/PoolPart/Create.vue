@@ -49,4 +49,5 @@
 </style>
 <script>
 import bootPage from './content'
+
 </script>

@@ -16,6 +16,9 @@ import Vuex from 'vuex'
 import store from './vuex/store'
 //  引入jquery
 import $ from 'jquery'
+//引入 Vueresource
+import VueResource from 'vue-resource'
+//import Mock from 'mockjs'
 //引入组件
 import Home from './components/Home'
 import DashBoard from './components/Dashboard'
@@ -25,6 +28,7 @@ import Storage from './components/Pool'
 Vue.use(ElementUI)
 Vue.use(Vuex)
 Vue.use(VueRouter)
+Vue.use(VueResource)
 const routes = [
   {
     path: '/',
