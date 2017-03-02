@@ -1,5 +1,6 @@
 <template>
     <div class="box">
+
       <table class="table table-hover table-bordered">
         <thead>
         <tr>
@@ -10,20 +11,19 @@
         </tr>
         </thead>
         <tbody>
-        <tr v-for="data in PoolData">
+
+        <tr v-for="data in DataPool">
           <td  v-text="data.name"></td>
           <td  v-text="data.config_controller"></td>
           <td  v-text="data.run_controller"></td>
           <td  v-text="data.size"></td>
 
         </tr>
+
         </tbody>
         <tfoot>
         <tr>
           <td colspan="4">
-            <div class="pull-left">
-              <button class="btn btn-sucess" @click="refresh">刷新</button>
-            </div>
             <div class="pull-right">
               <!--<boot-page ref:page :async="false" :data="lists" :lens="lenArr" :page-len="pageLen" :param="param"></boot-page>
              <!-- <bootPage></bootPage> -->
@@ -65,8 +65,7 @@
         </tr>
         </tfoot>
       </table>
-      <p>子组件传递会的数据:{{messages}}</p>
-      <child v-on:childmsg="notifyAll"></child>
+
     </div>
 </template>
 <style>
@@ -138,6 +137,7 @@ export default {
             {name:"pool1",size:"19.9G",config_controller:"A",run_controller:"A"},
             {name:"pool1",size:"19.9G",config_controller:"A",run_controller:"A"},
             ],
+            DataTotal:[],
             messages:["sd"],
             total:0,
             pageTotal:1
@@ -173,7 +173,7 @@ export default {
         getPages() {
             this.pages = [];
             //获取了总共的页数
-            this.pageTotal = Math.ceil(this.PoolData.length/this.len)
+            this.pageTotal = Math.ceil(this.DataTotal.length/this.len)
             //比较总页数和显示的页数
             if(this.pageTotal <= this.pageLen){
                   for(let i=1;i<=this.pageTotal;i++){
@@ -188,18 +188,22 @@ export default {
         },
         //获取数据
         getData() {
+
                   //首先确定一下要展示的页数
+                  console.log("-----");
+                  console.log(this.DataTotal)
+
                    let len = this.len; //获取当前的页数
                    let pageNum = this.pages[this.activeNum]-1; //获取当前的page[0]的数据
                    let newData = [];  //使用当前的数据来源
                    //开始向数组中push数据
                    for(let i=pageNum*len;i<(pageNum*len+len);i++){
-                       this.tableList[i] !== undefined ? newData.push(this.PoolData[i]):''
+                       this.DataTotal[i] !== undefined ? newData.push(this.DataTotal[i]):''
                    }
 
-                    this.PoolData = newData; //获取我们所需要的数据
-
-                    console.log("执行了这里了"+this.PoolData);
+                    this.DataPool = newData; //获取我们所需要的数据
+                    // this.DataPool = [{"name":"pool21","size":"19.9G","config_controller":"A","run_controller":"A",}]
+                    console.log(this.DataPool);
 
 
  },
@@ -224,6 +228,7 @@ export default {
        console.log(this.pageLen)
          if(this.pageTotal <= this.pageLen){
              this.activeNum = this.pages.length - 1;
+             console.log("当前的活跃的页数是:"+this.activeNum);
          }else {
             let lastPage = []
               for(let i= this.pageLen-1;i>=0;i--){
@@ -234,8 +239,7 @@ export default {
               this.activeNum === this.pages.length-1?this.getData():this.activeNum=this.pages.length-1
          }
        },
-       //跳转到上一页的功能
-         // 上一页
+         //跳转到上一页的功能
         onPrevClick () {
 
             // 当前页是否为当前最小页码
@@ -278,19 +282,22 @@ export default {
      },
      // TODO 传递到子组件的数据 add by 王圣文 20170228
      //TODO 现在不考虑两个组件之间的通信了
-     mounted: function(){
+     created: function(){
      //获取数据
 
       this.$http.get('http://hicmd/goabl/pool/list').then(successData => {
                   console.log(successData.body);
-                  let newTable = []; //定义一个新的数组
-                  let comData = successData.body;
-                  for(let i in comData){
-                    newTable.push(comData[i]);
+                  var newTable = []; //定义一个新的数组
+                  var comData = successData.body;
+                  console.log("人生如梦");
+                  console.log(comData['pool1']);
+                  for(var key in comData){
+                    newTable.push(comData[key]);
                   }
                   console.log(newTable);
-                  this.PoolData= newTable;
-                  console.log("现在存储池的数据为:"+this.PoolData);
+
+                  this.DataPool= newTable;
+                  this.DataTotal = newTable;
          //在数据未加载之前，先进行获取页数的操作
          this.getPages();
          this.getData();

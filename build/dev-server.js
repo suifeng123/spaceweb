@@ -22,8 +22,12 @@ var port = 8001
 var autoOpenBrowser = !!config.dev.autoOpenBrowser
 // Define HTTP proxies to your custom API backend
 // https://github.com/chimurai/http-proxy-middleware
-var proxyTable = config.dev.proxyTable
-
+//var proxyTable = config.dev.proxyTable
+var proxyTable =  {
+  '/hikcmd/global/': {
+    target: 'http://localhost:9090/'
+  }
+}
 var app = express()
 var compiler = webpack(webpackConfig)
 
@@ -35,6 +39,8 @@ var devMiddleware = require('webpack-dev-middleware')(compiler, {
 var hotMiddleware = require('webpack-hot-middleware')(compiler, {
   log: () => {}
 })
+
+
 // force page reload when html-webpack-plugin template changes
 compiler.plugin('compilation', function (compilation) {
   compilation.plugin('html-webpack-plugin-after-emit', function (data, cb) {

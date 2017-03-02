@@ -33,7 +33,6 @@ module.exports = {
       'components': resolve('src/components'),
       'jquery': resolve('src/assets/jquery-3.1.1')   //add by 王圣文
     },
-    //增加一个plugins add by 王圣文
     plugins:[
       new webpack.ProvidePlugin({
         $: 'jquery',

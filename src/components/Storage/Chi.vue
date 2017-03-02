@@ -2,7 +2,6 @@
 <div>
   <ul style="margin-top:-23px;">
   <!--增加路由-->
-
   <li style="display:inline-block;"><a href="javascript:;" @click="toggleText(tab01Text)"><button class="btn btn-success btn-lg">{{tab01Name}}</button></a></li>
 
   <li style="display:inline-block;"><a href="javascript:;" @click="toggleText(tab02Text)"><button class="btn btn-success btn-lg">{{tab02Name}}</button></a></li>
@@ -38,6 +37,9 @@ export default {
          tab04Name:'远程复制',
          currentView:'CreatePool'
          }
+     },
+     created: function(){
+      console.log(this.currentView);
      },
    components: {
        CreatePool,
