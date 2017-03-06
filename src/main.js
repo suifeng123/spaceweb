@@ -23,12 +23,14 @@ import VueResource from 'vue-resource'
 import Home from './components/Home'
 import DashBoard from './components/Dashboard'
 import Storage from './components/Pool'
+import ActionCreatePool from './components/ActionPool/ActionCreate'
 
 
 Vue.use(ElementUI)
 Vue.use(Vuex)
 Vue.use(VueRouter)
 Vue.use(VueResource)
+
 const routes = [
   {
     path: '/',
@@ -40,6 +42,13 @@ const routes = [
     name: 'Chi',
     component: Storage
   },
+  {
+    path: '/storage/chi/actionCreatePool',
+    name: 'actionCreatePool',
+    component: ActionCreatePool
+  },
+
+
   {
     path: '/storage/dataset',
     name: 'Dataset',
@@ -62,10 +71,14 @@ const routes = [
   },
 
 
+
 ]
+
 const router = new VueRouter({
       routes
 })
+
+
 
 /* eslint-disable no-new */
 new Vue({

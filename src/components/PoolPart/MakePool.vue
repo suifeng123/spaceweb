@@ -1,9 +1,34 @@
 <template>
     <div class="box">
+      <!--这一段是表格头的位置-->
 
+      <div style="position:relative;float:left;margin-left:-80px;display:inline">
+        <h1>存储池实例</h1>
+        <div style="display:inline;">
+        <select required v-model="selected">
+          <option v-for="option in options">
+            {{option}}
+          </option>
+        </select>
+        <input type="text" style="width:100px;" />
+          <button class="btn btn-sm btn-success">搜索</button>
+          <button class="btn btn-sm btn-success">刷新</button>
+          <!--<router-link to='/storage/chi/actionCreatePool'> -->
+          <button class="btn btn-sm btn-success">创建</button>
+          <!--</router-link> -->
+          <select required>
+            <option v-for="action in actions" >
+               {{ action }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <!--下面是table表格的格式-->
       <table class="table table-hover table-bordered">
         <thead>
         <tr>
+          <th width="5%;"></th>
           <th width="25%;">名字</th>
           <th width="25%;">运行控制器</th>
           <th width="25%;">配置控制器</th>
@@ -13,6 +38,7 @@
         <tbody>
 
         <tr v-for="data in DataPool">
+          <td><label class="i-checks"><input type="checkbox" /><i></i> </label></td>
           <td  v-text="data.name"></td>
           <td  v-text="data.config_controller"></td>
           <td  v-text="data.run_controller"></td>
@@ -69,6 +95,9 @@
     </div>
 </template>
 <style>
+.form-control{
+   display:inline-block;
+}
   .active{
      background:red;
      font-weight:bold;
@@ -140,7 +169,12 @@ export default {
             DataTotal:[],
             messages:["sd"],
             total:0,
-            pageTotal:1
+            pageTotal:1,
+            options: ['名称搜索','状态搜索'],
+            selected:'名称搜索',
+            actions:['删除','存储池状态','编辑选项','一致性检查','扩容'],
+            labelAction:'更多操作'
+
          }
      },
      components: {
@@ -278,7 +312,17 @@ export default {
                     this.getData()
                 }
             }
-        }
+        },
+        //创建存储池
+        go() {
+      this.$router.params={
+            userId:123
+         }
+         this.$router.replace('/storage/chi/actionCreatePool');
+
+         }
+
+
      },
      // TODO 传递到子组件的数据 add by 王圣文 20170228
      //TODO 现在不考虑两个组件之间的通信了
