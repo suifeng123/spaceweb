@@ -43,9 +43,9 @@ const routes = [
     component: Storage
   },
   {
-    path: '/storage/chi/actionCreatePool',
-    name: 'actionCreatePool',
-    component: ActionCreatePool
+    path: '/storage/chi/ActionCreatePool',
+    name:'ActionCreatePool',
+    component: ActionCreatePool,
   },
 
 

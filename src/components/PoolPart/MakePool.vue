@@ -14,7 +14,7 @@
           <button class="btn btn-sm btn-success">搜索</button>
           <button class="btn btn-sm btn-success">刷新</button>
           <!--<router-link to='/storage/chi/actionCreatePool'> -->
-          <button class="btn btn-sm btn-success">创建</button>
+          <button class="btn btn-sm btn-success" @click="go()">创建</button>
           <!--</router-link> -->
           <select required>
             <option v-for="action in actions" >
@@ -315,10 +315,7 @@ export default {
         },
         //创建存储池
         go() {
-      this.$router.params={
-            userId:123
-         }
-         this.$router.replace('/storage/chi/actionCreatePool');
+         this.$router.push({name:'ActionCreatePool',params:{DataPool:this.DataTotal}});
 
          }
 
@@ -329,12 +326,12 @@ export default {
      created: function(){
      //获取数据
 
-      this.$http.get('http://hicmd/goabl/pool/list').then(successData => {
+      this.$http.get('/hikcmd/global/pool/').then(successData => {
+                  console.log("现在的状态值：")
                   console.log(successData.body);
                   var newTable = []; //定义一个新的数组
                   var comData = successData.body;
                   console.log("人生如梦");
-                  console.log(comData['pool1']);
                   for(var key in comData){
                     newTable.push(comData[key]);
                   }

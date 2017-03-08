@@ -25,8 +25,7 @@ var autoOpenBrowser = !!config.dev.autoOpenBrowser
 //var proxyTable = config.dev.proxyTable
 var proxyTable =  {
   '/hikcmd/global/': {
-    target: 'http://localhost:9090',
-    changeOrigin: true
+    target: 'http://localhost:9090'
   }
 }
 var app = express()

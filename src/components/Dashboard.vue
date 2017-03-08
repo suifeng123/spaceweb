@@ -11,14 +11,34 @@ import data from './util/mock'
 
 export default {
    mounted: function(){
+   /*
+       this.$http.post('/hikcmd/global/disks/',{
+         id:'4',
+         name:'disk4'
+       }).then(res=>{
+          console.log("添加磁盘成功了")
+       },res => {
+          console.log("添加磁盘失败了")
+       })
+       /* 实验的版本
+         this.$http.post('/hikcmd/global/pool/',{
+         id:'6',
+          name:'pool6',
+         size: "19.9G",
+         config_controller: "A",
+         run_controller: "A",
+         free: "18.2G",
+         compress: "1.00x",
+         compressratio: "1.00x",
+         status: "healthy",
+         entry: "false"
 
-         this.$http.get('/hikcmd/global/pool/').then(response => {
-              console.log(response)
-              console.log("添加数据成功！！！！");
-         },response => {
-            console.log("fuck，添加数据失败")
-
+         }).then(res=>{
+           console.log("成功了")
+         },res=>{
+            console.log("失败了")
          })
+         */
 
 
 
