@@ -10,13 +10,13 @@
             {{option}}
           </option>
         </select>
-        <input type="text" style="width:100px;" />
-          <button class="btn btn-sm btn-success">搜索</button>
-          <button class="btn btn-sm btn-success">刷新</button>
+        <input type="text" v-model="contentSelect" style="width:100px;" />
+          <button class="btn btn-sm btn-success" @click="search()">搜索</button>
+          <button class="btn btn-sm btn-success" @click="refresh()">刷新</button>
           <!--<router-link to='/storage/chi/actionCreatePool'> -->
           <button class="btn btn-sm btn-success" @click="go()">创建</button>
           <!--</router-link> -->
-          <select required>
+          <select required  v-model="initialAction">
             <option v-for="action in actions" >
                {{ action }}
             </option>
@@ -28,17 +28,17 @@
       <table class="table table-hover table-bordered">
         <thead>
         <tr>
-          <th width="5%;"></th>
-          <th width="25%;">名字</th>
-          <th width="25%;">运行控制器</th>
-          <th width="25%;">配置控制器</th>
-          <th width="25%;">大小</th>
+          <th width="1%"><label><input type="checkbox" v-model="all" value="all" /> </label></th>
+          <th width="20px;">名字</th>
+          <th width="20px;">运行控制器</th>
+          <th width="20px;">配置控制器</th>
+          <th width="20px;">大小</th>
         </tr>
         </thead>
         <tbody>
 
         <tr v-for="data in DataPool">
-          <td><label class="i-checks"><input type="checkbox" /><i></i> </label></td>
+          <td><label width="10px"><input type="checkbox" v-model="data.checkbox" value="data.checkbox"/><i></i> </label></td>
           <td  v-text="data.name"></td>
           <td  v-text="data.config_controller"></td>
           <td  v-text="data.run_controller"></td>
@@ -49,8 +49,8 @@
         </tbody>
         <tfoot>
         <tr>
-          <td colspan="4">
-            <div class="pull-right">
+          <td colspan="30">
+            <div>
               <!--<boot-page ref:page :async="false" :data="lists" :lens="lenArr" :page-len="pageLen" :param="param"></boot-page>
              <!-- <bootPage></bootPage> -->
               <nav class="boot-nav">
@@ -91,6 +91,8 @@
         </tr>
         </tfoot>
       </table>
+
+      <Myconfirm></Myconfirm>
 
     </div>
 </template>
@@ -133,7 +135,7 @@
 <script>
 import bootPage from './content'
 import child from './Child'
-import data from '../util/mock' // TODO 引入 mock，从而能够实现模拟前端http请求的情况
+import Myconfirm from '../common/confirm'
 
 export default {
      data () {
@@ -172,9 +174,10 @@ export default {
             pageTotal:1,
             options: ['名称搜索','状态搜索'],
             selected:'名称搜索',
-            actions:['删除','存储池状态','编辑选项','一致性检查','扩容'],
-            labelAction:'更多操作'
-
+            actions:['--更多操作--','删除','存储池状态','编辑选项','一致性检查','扩容'],
+            initialAction:'--更多操作--',
+            all:false,
+            contentSelect:""
          }
      },
      components: {
@@ -313,11 +316,47 @@ export default {
                 }
             }
         },
+        search(){
+           console.log(this.selected);
+           var temp = this.selected;
+           switch(temp){
+             case "名称搜索" :
+                 console.log(this.contentSelect);
+
+           }
+        },
         //创建存储池
         go() {
          this.$router.push({name:'ActionCreatePool',params:{DataPool:this.DataTotal}});
 
-         }
+         },
+
+          refresh() {
+             // TODO 进行重新获取存储池状态的操作
+
+              this.$http.get('/hikcmd/global/pool/').then(successData => {
+                  console.log("上帝請賜予我數據：")
+                  console.log(successData.body);
+                  var newTable = []; //定义一个新的数组
+                  var comData = successData.body;
+                  console.log("人生如梦");
+                  for(var key in comData){
+                    newTable.push(comData[key]);
+                  }
+                  console.log(newTable);
+
+                  this.DataPool= newTable;
+                  this.DataTotal = newTable;
+         //在数据未加载之前，先进行获取页数的操作
+            this.getPages();
+            this.getData();
+            console.log("上帝，數據獲取完畢");
+
+         },failData => {
+          console.log("靠，又他妈帅了"+failData);
+         })
+
+          }
 
 
      },
@@ -327,7 +366,7 @@ export default {
      //获取数据
 
       this.$http.get('/hikcmd/global/pool/').then(successData => {
-                  console.log("现在的状态值：")
+                  console.log("上帝請賜予我數據：")
                   console.log(successData.body);
                   var newTable = []; //定义一个新的数组
                   var comData = successData.body;
@@ -342,7 +381,7 @@ export default {
          //在数据未加载之前，先进行获取页数的操作
          this.getPages();
          this.getData();
-         console.log("获取数据执行完毕");
+         console.log("上帝，數據獲取完畢");
 
          },failData => {
           console.log("靠，又他妈帅了"+failData);
@@ -362,9 +401,77 @@ export default {
             console.log("88888");
             this.getData();
         },
+        'all' (newVal,oldVal){
+           if(newVal==true){
+             for(var i=0;i<this.DataPool.length;i++){
+               this.DataPool[i].checkbox = true;
+             }
+           }
+        },
         //监听当前变化
         'activeNum' (newVal,oldVal) {
            this.getData()
+        },
+        'initialAction' (newVal,oldVal){
+           //TODO 進行具體的操作，首先獲取所需要的數據
+           var content = [];//定義一個數組，用來娶我麼想要的數據
+            if(this.all==true){
+                    for(let i=0;i<this.DataPool.length;i++){
+                        content.push(this.DataPool[i]['name']);
+                    }
+            }else{
+               for(let i=0;i<this.DataPool.length;i++){
+                    if(this.DataPool[i]['checkbox']==true) content.push(this.DataPool[i]['name'])
+
+                }
+           }
+             console.log("所有的獲取被選中的數據為:");
+            console.log(content);
+               if(content.length==1 && newVal != "删除"){
+                  switch(newVal){
+                    case "存储池状态" :
+                    /***存储池状态***/
+                    if(content.length!=1)
+                       alert("请选择一项");
+                     else
+                         this.$router.push({path:'/storage/chi/status',params:{DataPool:content}});
+
+                    break;
+                    case "编辑选项":
+                        if(content.length!=1)
+                            alert("请选择一项");
+                        else
+                            this.$router.push({path:'/storage/chi/edit'});
+                    break;
+
+                    case "扩容":
+                        if(content.length!=1)
+                            alert("请选择一项");
+                        else
+                             this.$router.push({path:'/storage/chi/expersion'});
+                    case "一致性检查":
+
+                                 if(confirm("您确定进行一致性检查吗???")==true){
+                                     console.log("进行对存储池进行一致性检查的操作");
+                                 }
+
+
+                    case "删除" :
+                           if(confirm("您确定删除此存储池吗???")==true){
+                                     console.log("进行对存储池删除操作");
+                                 }
+                   }
+              }else if(content.length>1 && newVal == "删除"){
+
+                 switch(newVal){
+                    case "删除" :
+                       if(confirm("您确定删除这些存储池吗???")==true){
+                                     console.log("进行对这些存储池删除操作");
+                          }
+
+                    }
+              }
+
         }
      },
 

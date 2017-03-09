@@ -18,12 +18,15 @@ import store from './vuex/store'
 import $ from 'jquery'
 //引入 Vueresource
 import VueResource from 'vue-resource'
-//import Mock from 'mockjs'
 //引入组件
 import Home from './components/Home'
 import DashBoard from './components/Dashboard'
 import Storage from './components/Pool'
 import ActionCreatePool from './components/ActionPool/ActionCreate'
+import PoolStatus from './components/ActionPool/Status'
+import EditPool from './components/ActionPool/EditPool'
+import ExpersionPool from './components/ActionPool/ExpansionPool'
+
 
 
 Vue.use(ElementUI)
@@ -47,8 +50,21 @@ const routes = [
     name:'ActionCreatePool',
     component: ActionCreatePool,
   },
-
-
+  {
+    path: '/storage/chi/status',
+    name:'PoolStatus',
+    component: PoolStatus,
+  },
+  {
+    path:'/storage/chi/edit',
+    name:'EditPool',
+    component:EditPool
+  },
+  {
+    path:'/storage/chi/expersion',
+    name:'ExpersionPool',
+    component:ExpersionPool
+  },
   {
     path: '/storage/dataset',
     name: 'Dataset',

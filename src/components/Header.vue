@@ -27,8 +27,9 @@
 .panel {
     position: relative;
     top: 0px;
-    left: 0px;
+    left:0px;
     width: 100%;
+
 }
 .logo {
     margin-top:10px;

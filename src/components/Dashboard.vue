@@ -7,7 +7,6 @@
 
 </style>
 <script>
-import data from './util/mock'
 
 export default {
    mounted: function(){

@@ -2,7 +2,7 @@
   <div>
   <MyHeader></MyHeader>
   <Leftbar></Leftbar>
-  <div>
+  <div class="maindiv">
     <div class="panel-head">创建存储池</div>
     <form name="flavorForm" class="form">
 
@@ -98,6 +98,11 @@
 
 </template>
 <style>
+.maindiv {
+    position:relative;
+    float:left;
+    margin-left:0px;
+}
 .div_table_left {
    display:inline-block;float:left;
 }
@@ -111,6 +116,8 @@ label {
   width:100px;
 }
   .panel-head {
+     position:relative;
+     margin-left:120px;
      font-size:25px;
      font-weight:bold;
   }
@@ -197,17 +204,19 @@ export default {
      //进行创建存储池的操作
      createPool() {
             //进行创建存储池的操作
-            this.$http.post('hikcmd/global/pool',{
-               id:'7',
+            console.log(this.name+this.controller);
+            this.$http.post('/hikcmd/global/pool/',{
+               id:Math.random()*10,
               name:this.name,
-         size: "19.9G",
-         config_controller: this.controller,
-         run_controller: this.controller,
-         free: "18.2G",
-         compress: "1.00x",
-         compressratio: "1.00x",
-         status: "healthy",
-         entry: "false"
+              size: "19.9G",
+              config_controller: this.controller,
+              run_controller: this.controller,
+              free: "18.2G",
+              compress: "1.00x",
+              compressratio: "1.00x",
+              status: "healthy",
+              entry: "false",
+              checkbox:false
             }).then(
               res => {
               //创建存储池成功
