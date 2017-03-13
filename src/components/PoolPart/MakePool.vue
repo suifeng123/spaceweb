@@ -92,7 +92,6 @@
         </tfoot>
       </table>
 
-      <Myconfirm></Myconfirm>
 
     </div>
 </template>
@@ -105,7 +104,7 @@
      font-weight:bold;
   }
   .box {
-     height:600px;
+     height:100%;
      width:1000px;
      position: relative;
      left:100px;
@@ -162,6 +161,7 @@ export default {
             {num:11,author:'刘德华',content:'忘情水',remark:'情歌'}
             ],//分页组件传回的分页后的数据
             DataPool:[],
+            DataPoolcopy:[],
             DataPool1:[
             {name:"pool1",size:"19.9G",config_controller:"A",run_controller:"A"},
             {name:"pool1",size:"19.9G",config_controller:"A",run_controller:"A"},
@@ -169,6 +169,7 @@ export default {
             {name:"pool1",size:"19.9G",config_controller:"A",run_controller:"A"},
             ],
             DataTotal:[],
+            DataTotalcopy:[],
             messages:["sd"],
             total:0,
             pageTotal:1,
@@ -182,7 +183,8 @@ export default {
      },
      components: {
         bootPage,
-        child
+        child,
+        Myconfirm
      },
      methods: {
 
@@ -223,6 +225,8 @@ export default {
             }
             console.log("999999"+this.pages);
         },
+
+
         //获取数据
         getData() {
 
@@ -322,8 +326,36 @@ export default {
            switch(temp){
              case "名称搜索" :
                  console.log(this.contentSelect);
+                 var content = [];
+                 for(let i=0;i<this.DataTotal.length;i++){
+                           if(this.DataTotal[i].name==this.contentSelect){
+                                  content.push(this.DataTotal[i])
+                           }
+                 }
+                 var temp1 = this.DataToal;
+                 this.DataPool = content;
+                 this.DataTotal = content;
+                 this.getPages();
+                 this.getData();
+                 this.DataToal = temp1;
+                 break;
 
-           }
+              case "状态搜索" :
+                 console.log(this.contentSelect);
+                 var content = [];
+                 for(let i=0;i<this.DataTotal.length;i++){
+                           if(this.DataTotal[i].run_controller=='A'){
+                                  content.push(this.DataTotal[i])
+                           }
+                 }
+                 var temp1 = this.DataToal;
+                 this.DataPool = content;
+                 this.DataTotal = content;
+                 this.getPages();
+                 this.getData();
+                 this.DataToal = temp1;
+                 break;
+              }
         },
         //创建存储池
         go() {
@@ -377,7 +409,9 @@ export default {
                   console.log(newTable);
 
                   this.DataPool= newTable;
+
                   this.DataTotal = newTable;
+                  this.DataTotalcopy = newTable;//add by 王圣文
          //在数据未加载之前，先进行获取页数的操作
          this.getPages();
          this.getData();

@@ -97,11 +97,14 @@
     </div>
 
 </template>
-<style>
+<style scoped>
 .maindiv {
-    position:relative;
-    float:left;
-    margin-left:0px;
+    position:fixed;
+    top:60px;
+    left:180px;
+    overflow:auto;
+    height:100%;
+    right:0;
 }
 .div_table_left {
    display:inline-block;float:left;

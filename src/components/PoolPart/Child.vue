@@ -1,11 +1,14 @@
 <template>
-    <div>
+    <div class="maindiv">
       <input v-model="msg" />
       <button v-on:click="notify">向父组件上报数据</button>
     </div>
 </template>
-<style>
-
+<style scoped>
+.maindiv {
+   position:absolute;
+   left:180px;
+}
 </style>
 <script>
 //首先写一个比较简单的分页功能，即使这个分页功能只是使用与一个需求而已，比如这个分页功能只适合

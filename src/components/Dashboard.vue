@@ -1,10 +1,22 @@
 <template>
-  <div>
-    <h1>靠，又他妈帅了，这个主页面还没进行开发</h1>
+  <div class="dashboard">
+    <h1>这个主页面还没进行开发</h1>
+    <h1>这个主页面还没进行开发</h1>
+    <h1>这个主页面还没进行开发</h1>
+    <h1>这个主页面还没进行开发</h1>
+    <h1>这个主页面还没进行开发</h1>
   </div>
 </template>
-<style>
+<style scoped>
+.dashboard {
+  position:absolute;
+  top:60px;
+  bottom:0;
+  left:180px;
+  overflow:auto;
+  right:0;
 
+}
 </style>
 <script>
 

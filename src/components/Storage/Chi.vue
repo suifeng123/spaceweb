@@ -1,6 +1,6 @@
 <template>
-<div>
-  <ul style="margin-top:-23px;">
+<div class="maindiv">
+  <ul>
   <!--增加路由-->
   <li style="display:inline-block;"><a href="javascript:;" @click="toggleText(tab01Text)"><button class="btn btn-success btn-lg">{{tab01Name}}</button></a></li>
 
@@ -14,7 +14,18 @@
   </div>
 </div>
 </template>
-<style>
+<style scoped>
+.maindiv {
+  position:absolute;
+  left:180px;
+  top:60px;
+  right:0;
+  bottom:0;
+  overflow:auto;
+
+
+
+}
 
 </style>
 <script>

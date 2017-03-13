@@ -17,7 +17,18 @@ export default {
 </script>
 
 <style>
+body{
+   display:block;
+   margin:0 auto;
+   padding:0;
+   min-width:1280px;
+   vertical-align:baseline;
+}
 #app {
-
+    position:fixed;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
 }
 </style>

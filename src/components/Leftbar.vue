@@ -96,27 +96,31 @@
 
     </div>
 </template>
-<style>
+<style scoped>
 li {
   list-style-type:none;
 }
 .ul1 {
 
-   height:600px;
+   height:500px;
    margin-top: 60px;
 }
 .main {
-  margin-top:-21px;
-  margin-left:1px;
+  position:fixed;
+  left:0;
   width:180px;
-  position:relative;
-  float:left;
-  height:100%;
-  background:#324157;
+  bottom:0;
+  top:60px;
+  background:#2869a9;
+  overflow-y:auto;
 }
 span {
    font-size: 25px;
    color:white;
+}
+html,body{
+height:100%;
+margin:0px;
 }
 
 </style>
