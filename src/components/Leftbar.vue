@@ -1,95 +1,105 @@
 <template>
-    <div class="main">
+    <div id="main" class="main">
       <!-- 这个是设计的左侧的导航栏 -->
       <!--这里使用boostrap来设置左侧导航栏-->
-      <ul class="ul1">
+      <ul id="ul1" class="ul1">
         <li>
-          <span>总览</span>
+
+          <span><img  class="img1" src="./images/left/system_current.png">总览</span>
+
         </li>
         <li>
-          <span @click="openurl1()">系统</span>
+
+          <span @click="openurl1()"><img class="img1" src="./images/left/syetem_management_c.png">系统
+          <img v-if="zonglan"  src="./images/left/select_xl01.png">
+          <img v-if="zonglancopy"  src="./images/left/select_xl.png"></span>
           <!--实现二级标题-->
           <ul v-show='flag1'>
                <li>
-                 <span style="font-size:15px;font-weight:bold;">设备信息</span>
+                 <span>设备信息</span>
                </li>
                <li>
-                 <span style="font-size:15px;font-weight:bold;">监控</span>
+                 <span>监控</span>
                </li>
                <li>
-                 <span style="font-size:15px;font-weight:bold;">设置</span>
+                 <span>设置</span>
                </li>
                <li>
-                  <span style="font-size:15px;font-weight:bold;">日志</span>
+                  <span>日志</span>
                </li>
           </ul>
         </li>
         <li>
-          <span @click="openurl2()">存储服务</span>
+          <span @click="openurl2()"><img  src="./images/left/statistics_current.png">存储服务
+            <img v-if="cunchu" src="./images/left/select_xl01.png">
+            <img v-if="cunchucopy" src="./images/left/select_xl.png"></span>
           <ul v-show="flag2">
               <li @click="changeTab">
                 <router-link to="/storage/chi">
-                <span style="font-size:15px;font-weight:bold;">存储池</span>
+                <span>存储池</span>
                 </router-link>
               </li>
             <li @click="changeTab">
               <router-link to="/storage/dataset">
-              <span style="font-size:15px;font-weight:bold;">文件系统</span>
+              <span>文件系统</span>
               </router-link>
             </li>
             <li @click="changeTab">
               <router-link to="/storage/volume">
-              <span style="font-size:15px;font-weight:bold;">卷(待定)</span>
+              <span>卷(待定)</span>
               </router-link>
             </li>
             <li @click="changeTab">
               <router-link to="/storage/virtual">
-              <span style="font-size:15px;font-weight:bold;">虚拟化</span>
+              <span>虚拟化</span>
               </router-link>
             </li>
           </ul>
         </li>
         <li>
-          <span @click="openurl3()">访问</span>
+          <span @click="openurl3()"><img class="img1" src="./images/left/source_current.png">访问
+          <img  src="./images/left/select_xl01.png"></span>
           <ul v-show="flag3">
              <li>
-                <span style="font-size:15px;font-weight:bold;">主机</span>
+                <span>主机</span>
             </li>
             <li>
-              <span style="font-size:15px;font-weight:bold;">网络</span>
+              <span>网络</span>
             </li>
             <li>
-              <span style="font-size:15px;font-weight:bold;">映射</span>
+              <span>映射</span>
             </li>
           </ul>
         </li>
         <li>
-          <span @click="openurl4()">数据保护</span>
+          <span @click="openurl4()"><img class="img1" src="./images/left/cloud_current.png">数据保护
+          <img src="./images/left/select_xl01.png"></span>
           <ul v-show="flag4">
             <li>
-              <span style="font-size:15px;font-weight:bold;">快照</span>
+              <span>快照</span>
             </li>
             <li>
-              <span style="font-size:15px;font-weight:bold;">复制</span>
+              <span>复制</span>
             </li>
           </ul>
         </li>
         <li>
-          <span @click="openurl5()">其他</span>
+          <span @click="openurl5()"><img class="img1" src="./images/left/custom_current.png">其他
+          <img class="img2" src="./images/left/select_xl01.png"></span>
           <ul v-show="flag5">
             <li>
-                <span style="font-size:15px;font-weight:bold;">升级</span>
+                <span>升级</span>
             </li>
             <li>
-              <span style="font-size:15px;font-weight:bold;">关机</span>
+              <span>关机</span>
             </li>
             <li>
-              <span style="font-size:15px;font-weight:bold;">重启</span>
+              <span>重启</span>
             </li>
           </ul>
         </li>
         <li>
-           <span>支持</span>
+           <span><img class="img1" src="./images/left/channel_current.png">支持</span>
         </li>
       </ul>
 
@@ -97,13 +107,75 @@
     </div>
 </template>
 <style scoped>
+#main{
+
+   text-align:center;
+}
+
+#main ul li{
+  padding:0;
+}
+#main ul{
+position:relative;
+padding:4px 0;
+margin:0;
+overflow:hidden;
+}
+#ul1{
+  position:relative;
+  top:60px;
+}
+.img1{
+  position:relative;
+  margin-right:20px;
+}
+#img1{
+  position:fixed;
+  left:30px;
+  top:140px;
+}
+#img2{
+  position:fixed;
+  left:30px;
+  top:180px;
+}
+#line1{
+  position:fixed;
+  left:140px;
+  top:180px;
+}
+#img3 {
+  position:fixed;
+  left:30px;
+  top:220px;
+}
+#line2{
+  position:fixed;
+  left:140px;
+  top:220px;
+}
+.img2 {
+  margin-left:20px;
+}
+ul li>span:hover{
+   color:red;
+}
+ul li ul li span{
+  font-size:10px;
+}
+ul li ul li span:hover{
+   color:red;
+}
 li {
   list-style-type:none;
 }
-.ul1 {
-
-   height:500px;
-   margin-top: 60px;
+ul>li{
+ position: relative;
+ margin-top:10px;
+}
+ul>li>ul>li{
+   position:relative;
+   margin-top:0px;
 }
 .main {
   position:fixed;
@@ -111,16 +183,12 @@ li {
   width:180px;
   bottom:0;
   top:60px;
-  background:#2869a9;
+  background:#3992d0;
   overflow-y:auto;
 }
 span {
-   font-size: 25px;
+   font-size: 20px;
    color:white;
-}
-html,body{
-height:100%;
-margin:0px;
 }
 
 </style>
@@ -136,7 +204,9 @@ import { mapGetters,mapActions } from 'vuex'
        flag3: false,
        flag4: false,
        flag5: false,
-       ff: 'hh'
+       ff: 'hh',
+       zonglan:true,
+       zonglancopy:false
        }
      },
      methods: {
@@ -147,8 +217,22 @@ import { mapGetters,mapActions } from 'vuex'
         openurl1: function(){
              if(this.flag1==true){
                 this.flag1 = false;
+                if(this.zonglan==true){
+                  this.zonglan=false;
+                  this.zonglancopy=true;
+                }else{
+                  this.zonglan=true;
+                  this.zonglancopy=false;
+                }
              }else{
                 this.flag1 = true;
+                if(this.zonglan==true){
+                  this.zonglan=false;
+                  this.zonglancopy=true;
+                }else{
+                  this.zonglan=true;
+                  this.zonglancopy=false;
+                }
              }
         },
         openurl2: function(){

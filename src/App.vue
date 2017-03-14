@@ -23,6 +23,8 @@ body{
    padding:0;
    min-width:1280px;
    vertical-align:baseline;
+   font-family: Arial, "Hiragino Sans GB", "Microsoft YaHei", 微软雅黑, STHeiti, "WenQuanYi Micro Hei", SimSun, sans-serif;
+
 }
 #app {
     position:fixed;
