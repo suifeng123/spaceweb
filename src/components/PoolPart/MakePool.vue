@@ -1,8 +1,8 @@
 <template>
-    <div class="box">
+    <div class="maindiv">
       <!--这一段是表格头的位置-->
 
-      <div style="position:relative;float:left;margin-left:-80px;display:inline">
+      <div style="display:inline">
         <h1>存储池实例</h1>
         <div style="display:inline;">
         <select required v-model="selected">
@@ -95,23 +95,25 @@
 
     </div>
 </template>
-<style>
+<style scoped>
+.maindiv{
+  position:absolute;
+  top:50px;
+  bottom:0;
+  left:20px;
+  overflow:auto;
+  right:0;
+}
 .form-control{
    display:inline-block;
 }
-  .active{
+.active{
      background:red;
      font-weight:bold;
   }
-  .box {
-     height:100%;
-     width:1000px;
-     position: relative;
-     left:100px;
-     float:left;
-  }
 
-  .boot-select {
+
+.boot-select {
     float: right;
     width: 80px;
 }
